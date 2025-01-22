@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Password Generator</title>
+    <link rel="stylesheet" href="Style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+</head>
+<body>
+    <div class="theme-switch">
+        <i class="fas fa-sun"></i>
+        <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider round"></span>
+        </label>
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <div class="container">
+        <h1>Password Generator</h1>
+        <div class="card">
+            <div class="mode-switch">
+                <button class="mode-btn active" data-mode="random">Random Password</button>
+                <button class="mode-btn" data-mode="memorable">Memorable Passphrase</button>
+            </div>
+
+            <div class="inputBox">
+                <input type="text" class="passBox" id="passBox" disabled>
+                <button class="visibility-btn" id="togglePassword">
+                    <i class="fas fa-eye"></i>
+                </button>
+                <button class="copy-btn" id="copyIcon">
+                    <i class="fas fa-copy"></i>
+                    <span class="tooltip">Copy</span>
+                </button>
+            </div>
+
+            <div class="strength-indicator">
+                <div class="strength-bar" id="strengthBar"></div>
+                <div class="strength-details">
+                    <span class="strength-text" id="strengthText">Password Strength</span>
+                    <span class="entropy" id="entropyValue">Entropy: 0 bits</span>
+                </div>
+            </div>
+
+            <div class="password-categories" id="passwordCategories">
+                <span class="category uppercase">0 uppercase</span>
+                <span class="category lowercase">0 lowercase</span>
+                <span class="category numbers">0 numbers</span>
+                <span class="category symbols">0 symbols</span>
+            </div>
+
+            <div id="randomPasswordOptions">
+                <div class="slider-container">
+                    <input type="range" min="10" max="30" value="16" id="inputSlider" class="custom-slider">
+                    <div class="row">
+                        <p>Password Length: <span id="sliderValue">16</span></p>
+                        <span id="charCounter">0 characters</span>
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="row">
+                        <label for="lowercase">
+                            <i class="fas fa-font"></i> Lowercase Letters (a-z)
+                        </label>
+                        <input type="checkbox" name="lowercase" id="lowercase" checked>
+                    </div>
+                    
+                    <div class="row">
+                        <label for="Uppercase">
+                            <i class="fas fa-font fa-lg"></i> Uppercase Letters (A-Z)
+                        </label>
+                        <input type="checkbox" name="Uppercase" id="Uppercase" checked>
+                    </div>
+
+                    <div class="row">
+                        <label for="numbers">
+                            <i class="fas fa-hashtag"></i> Numbers (0-9)
+                        </label>
+                        <input type="checkbox" name="numbers" id="numbers" checked>
+                    </div>
+
+                    <div class="row">
+                        <label for="symbols">
+                            <i class="fas fa-at"></i> Symbols (@-*)
+                        </label>
+                        <input type="checkbox" name="symbols" id="symbols" checked>
+                    </div>
+
+                    <div class="row">
+                        <label for="avoidSimilar">
+                            <i class="fas fa-not-equal"></i> Avoid Similar Characters (O0, Il1)
+                        </label>
+                        <input type="checkbox" name="avoidSimilar" id="avoidSimilar">
+                    </div>
+
+                    <div class="row">
+                        <label for="avoidWords">
+                            <i class="fas fa-book"></i> Avoid Dictionary Words
+                        </label>
+                        <input type="checkbox" name="avoidWords" id="avoidWords">
+                    </div>
+
+                    <div class="row">
+                        <label for="autoCopy">
+                            <i class="fas fa-clipboard"></i> Auto-Copy on Generation
+                        </label>
+                        <input type="checkbox" name="autoCopy" id="autoCopy">
+                    </div>
+                </div>
+            </div>
+
+            <div id="memorablePasswordOptions" style="display: none;">
+                <div class="row">
+                    <label for="wordCount">Number of Words</label>
+                    <select id="wordCount">
+                        <option value="3">3 Words</option>
+                        <option value="4" selected>4 Words</option>
+                        <option value="5">5 Words</option>
+                        <option value="6">6 Words</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label for="separator">Word Separator</label>
+                    <select id="separator">
+                        <option value="-">Hyphen (-)</option>
+                        <option value=".">Dot (.)</option>
+                        <option value=" ">Space ( )</option>
+                        <option value="">None</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label for="capitalizeWords">
+                        <i class="fas fa-font"></i> Capitalize Words
+                    </label>
+                    <input type="checkbox" name="capitalizeWords" id="capitalizeWords" checked>
+                </div>
+                <div class="row">
+                    <label for="addNumber">
+                        <i class="fas fa-plus-circle"></i> Add Number
+                    </label>
+                    <input type="checkbox" name="addNumber" id="addNumber" checked>
+                </div>
+            </div>
+
+            <button type="button" class="getBtn" id="getBtn">
+                <i class="fas fa-key"></i> Generate Password
+            </button>
+
+            <div class="password-history">
+                <h3>Password History</h3>
+                <div class="history-list" id="passwordHistory"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="GUI.js"></script>
+</body>
+</html>

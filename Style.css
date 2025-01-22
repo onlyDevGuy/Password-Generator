@@ -1,0 +1,382 @@
+:root {
+    --primary-color: #3162cb;
+    --text-color: #333333;
+    --bg-color: #f0f2f5;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --success-color: #4CAF50;
+    --warning-color: #FFC107;
+    --error-color: #f44336;
+}
+
+[data-theme="dark"] {
+    --primary-color: #4a80ff;
+    --text-color: #ffffff;
+    --bg-color: #1a1a1a;
+    --card-bg: rgba(30, 30, 30, 0.9);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    transition: all 0.3s ease;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--bg-color);
+    color: var(--text-color);
+    position: relative;
+}
+
+.theme-switch {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 8px 32px var(--shadow-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.container h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.inputBox {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.passBox {
+    width: 100%;
+    height: 50px;
+    padding: 10px 45px 10px 20px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    font-size: 18px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    outline: none;
+    transition: all 0.3s;
+}
+
+.visibility-btn,
+.copy-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 20px;
+    padding: 5px;
+    transition: all 0.3s;
+}
+
+.visibility-btn {
+    right: 45px;
+}
+
+.copy-btn {
+    right: 10px;
+}
+
+.copy-btn:hover,
+.visibility-btn:hover {
+    color: var(--primary-color);
+}
+
+.tooltip {
+    position: absolute;
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    bottom: -30px;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.strength-indicator {
+    margin: 20px 0;
+}
+
+.strength-bar {
+    height: 10px;
+    border-radius: 5px;
+    background: #ddd;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+.strength-bar::before {
+    content: '';
+    width: 0;
+    height: 100%;
+    display: block;
+    transition: all 0.3s;
+}
+
+.strength-text {
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.password-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.category {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.custom-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    margin: 20px 0;
+}
+
+.custom-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.custom-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.row label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-color);
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary-color);
+}
+
+.getBtn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.getBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(49, 98, 203, 0.3);
+}
+
+.password-history {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.password-history h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.history-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.history-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+.generated {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.mode-switch {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.mode-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.mode-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.mode-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.strength-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.entropy {
+    font-size: 12px;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+#memorablePasswordOptions select {
+    padding: 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-color);
+    width: 120px;
+}
+
+#charCounter {
+    font-size: 12px;
+    color: var(--text-color);
+    opacity: 0.8;
+}
